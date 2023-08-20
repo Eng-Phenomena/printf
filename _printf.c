@@ -28,7 +28,8 @@ int _printf(const char *format, ...)
 	int i = 0, j = 0;
 	char char_format;
 	char *str_format;
-	
+	int int_format;
+
 	va_start(args, format);
 	
 	if (!format || (format[0] == '%' && !format[1]))

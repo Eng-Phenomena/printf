@@ -11,7 +11,17 @@ int _strlen(const char *str);
  * @...: variable num of parameters
  *Return: num of characters
  */
+void print_int(int n)
+{
+	if (n < 0) {
+	_putchar('-');
+	n = -n;
+	}
+	if (n/10)
+	print_int(n/10);
 
+	_putchar(n%10 + '0');
+}
 int _printf(const char *format, ...)
 {
 	va_list args;
@@ -48,6 +58,16 @@ int _printf(const char *format, ...)
 					break;
 				case '%':
 					_putchar('%');
+					break;
+				case 'd':
+					int_format = va_arg(args, int);
+					print_int(int_format);
+					i++;
+					break;
+				case 'i':
+					int_format = va_arg(args, int);
+					print_int(int_format);
+					i++;
 					break;
 			}
 		}		

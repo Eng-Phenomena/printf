@@ -3,6 +3,6 @@
 
 int _printf(const char *format, ...);
 int _strlen(const char *str);
-int _putchar(char c);
+int _putchar(const char c);
 
 #endif

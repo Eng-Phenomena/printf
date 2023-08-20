@@ -1,6 +1,21 @@
+#include <unistd.h>
 #include <stdarg.h>
 #include "main.h"
 
+int _printf(const char *format, ...);
+int _strlen(const char *str);
+int _putchar(char c);
+
+/**
+ * _putchar - prints characters
+ * @c: char to be printed
+ * Return: always 0
+ */
+int _putchar(char c)
+{
+        write(1, &c, 1);
+        return (0);
+}
 
 /**
  * _printf - like printf

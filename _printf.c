@@ -11,17 +11,6 @@ int _strlen(const char *str);
  * @...: variable num of parameters
  *Return: num of characters
  */
-void print_int(int n)
-{
-	if (n < 0) {
-	_putchar('-');
-	n = -n;
-	}
-	if (n/10)
-	print_int(n/10);
-
-	_putchar(n%10 + '0');
-}
 int _printf(const char *format, ...)
 {
 	va_list args;
@@ -44,35 +33,38 @@ int _printf(const char *format, ...)
 				_putchar('\n');
 		if (format[i] == '%')
 		{
-			switch(format[i + 1])
+			if (format[i + 1] == 'c')
 			{
-				case 'c':
-					char_format = va_arg(args, int);
-					_putchar(char_format);
-					i++;
-					break;
-				case 's':
-					str_format = va_arg(args, char *);
-					if (str_format == NULL)
-						str_format = "(null)";
-					for (j = 0; str_format[j] != '\0'; j++)
+				char_format = va_arg(args, int);
+				_putchar(char_format);
+				i++;
+			}
+			else if (format[i + 1] == 's')
+			{
+				str_format = va_arg(args, char *);
+				if (str_format == NULL)
+					str_format = "(null)";
+				for (j = 0; str_format[j] != '\0'; j++)
 					sum += _putchar(str_format[j]);
-					i++;
-					sum--;
-					break;
-				case '%':
-					_putchar('%');
-					break;
-				case 'd':
-					int_format = va_arg(args, int);
-					print_int(int_format);
-					i++;
-					break;
-				case 'i':
-					int_format = va_arg(args, int);
-					print_int(int_format);
-					i++;
-					break;
+				i++;
+				sum--;
+			}
+			else if (format[i + 1] == 'd' || format[i + 1] == 'i')
+			{
+				int_format = va_arg(args, int);
+				sum += print_int(int_format);
+				sum--;
+				i++;
+			}
+			else if (format[i + 1] == '%')
+			{
+				_putchar('%');
+				i++;
+			}
+			else
+			{
+				if (format[i + 1] != '\0')
+					_putchar(format[i + 1]);
 			}
 		}		
 		
@@ -106,4 +98,54 @@ int _strlen(const char *str)
 			count++;
 	}
 	return (count);
+}
+
+/**
+ * print_int - prints integers
+ * @n: num
+ * Return: len of num
+ */
+
+int print_int(int n)
+{
+	int count = 0;
+
+	if (n < 0)
+		count++;
+	count += len_num(n);
+
+	if (n == MAX)
+	{
+		_putchar('-');
+		_putchar('2');
+		print_int(147483648);
+	}
+	else if (n < 0){
+	       	_putchar('-');
+		n = -n;
+	}
+
+	else if (n >= 10)
+	{
+		print_int(n / 10);
+		print_int(n % 10);
+	}
+
+	else if (n < 10)
+		_putchar(n + '0');
+
+	return (count);
+}
+
+/**
+ * len_num - num lenght
+ * @n: num
+ * Return: len
+ */
+
+int len_num(int n)
+{
+	if(n == 0)
+		return(0);
+	return (1 + len_num(n / 10));
 }

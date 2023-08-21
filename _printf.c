@@ -28,7 +28,7 @@ int _printf(const char *format, ...)
 	int i = 0, j = 0;
 	char char_format;
 	char *str_format;
-	int int_format;
+	int int_format, sum = _strln(format);
 
 	va_start(args, format);
 	
@@ -54,8 +54,9 @@ int _printf(const char *format, ...)
 				case 's':
 					str_format = va_arg(args, char *);
 					for (j = 0; str_format[j] != '\0'; j++)
-						_putchar(str_format[j]);
+					sum += _putchar(str_format[j]);
 					i++;
+					sum--;
 					break;
 				case '%':
 					_putchar('%');
@@ -79,7 +80,7 @@ int _printf(const char *format, ...)
 		i++;
 	}
 	va_end(args);
-	return _strlen(format);
+	return (sum);
 }
 
 /**

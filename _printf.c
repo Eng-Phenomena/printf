@@ -53,6 +53,8 @@ int _printf(const char *format, ...)
 					break;
 				case 's':
 					str_format = va_arg(args, char *);
+					if (str_format == NULL)
+						str_format = "(null)";
 					for (j = 0; str_format[j] != '\0'; j++)
 					sum += _putchar(str_format[j]);
 					i++;

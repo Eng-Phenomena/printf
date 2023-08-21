@@ -160,9 +160,8 @@ int len_num(int n)
 
 /**
  *
- * print_bin: prints an Unsigned int as a binary
+ * print_bin - prints an Unsigned int as a binary
  * @n: argument
- *
  * Return: Pow
  */
 int print_bin(int n)

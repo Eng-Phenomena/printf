@@ -14,5 +14,6 @@ int _strlen(const char *str);
 int _putchar(const char c);
 int print_int(int n);
 int len_num(int n);
+int print_bin(int n);
 
 #endif

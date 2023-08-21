@@ -56,6 +56,14 @@ int _printf(const char *format, ...)
 				sum--;
 				i++;
 			}
+			else if (format[i + 1] == 'b')
+			{
+				int_format = va_arg(args, int);
+				if (int_format < 0)
+					int_format = -int_format;
+				sum += print_bin(int_format);
+				i++;
+			}
 			else if (format[i + 1] == '%')
 			{
 				_putchar('%');
@@ -148,4 +156,39 @@ int len_num(int n)
 	if(n == 0)
 		return(0);
 	return (1 + len_num(n / 10));
+}
+
+/**
+ *
+ * print_bin: prints an Unsigned int as a binary
+ * @n: argument
+ *
+ * Return: Pow
+ */
+int print_bin(int n)
+{
+	int pow = 0;
+	int base = 1, i;
+
+	for (i = 0; (n - base) >= 0; i++)
+	{
+		pow++;
+		base *= 2;
+	}
+	base = base / 2;
+
+	for (i = 0; i < pow; i++)
+	{
+		if (n - base >= 0)
+		{
+			n = n - base;
+			_putchar('1');
+		}
+		else
+		{
+			_putchar('0');
+		}
+		base /= 2;
+	}
+	return (pow);
 }

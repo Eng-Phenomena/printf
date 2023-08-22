@@ -128,12 +128,13 @@ int print_int(int n)
 		_putchar('2');
 		print_int(147483648);
 	}
-	else if (n < 0){
+	else if (n < 0)
+	{
 	       	_putchar('-');
 		n = -n;
 	}
 
-	else if (n >= 10)
+	if (n >= 10)
 	{
 		print_int(n / 10);
 		print_int(n % 10);
